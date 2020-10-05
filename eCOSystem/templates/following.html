@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body_block %}
+
+		<section class="companies-info">
+			<div class="container">
+				<div class="company-title">
+					<h3>Following</h3>
+				</div><!--company-title end-->
+				<div class="companies-list">
+					<div class="row">
+                        {% for profile in profiles %}
+                        {% if profile.user_email in current_user_followings %}
+
+						<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+							<div class="company_profile_info">
+								<div class="company-up-info">
+									<img src="{% static 'images/resources/pf-icon1.png' %}" alt="">
+									<h3>{{ profile.user_name }}</h3>
+
+									<h4>@{{ profile.user_email }}</h4>
+
+									<ul>
+										<li><form action="{% url 'profiles:FollowingView' %}" method="post">{% csrf_token %}
+																						<input type="hidden" id="follow_name" name="follow_name" value="{{ profile.user_name }}">
+																				 <input type="hidden" id="follow_email" name="follow_email" value="{{ profile.user_email }}">
+
+																						 <input type="submit" value="Unfollow" name="follow_button" class="btn btn-primary" ></form></li>
+										<li><a href="mailto:{{profile.user_email}}" title="" class="message-us"><i class="fa fa-envelope"></i></a></li>
+									</ul>
+
+								</div>
+                                <a href="http://127.0.0.1:8000/my_profile_feed/customViewProfile/?profile_user_name={{ profile.user_name }}&profile_user_email={{ profile.user_email }}&View+Profile=View+Profile"" title="" class="view-more-pro">View Profile</a>
+                            </div>
+                        </div>
+                                {% endif %}
+                                {% endfor %}
+							</div><!--company_profile_info end-->
+						</div>
+
+
+					</div>
+				</div><!--companies-list end-->
+				<div class="process-comm">
+					<div class="spinner">
+						<div class="bounce1"></div>
+						<div class="bounce2"></div>
+						<div class="bounce3"></div>
+					</div>
+				</div><!--process-comm end-->
+			</div>
+		</section><!--companies-info end-->
+
+
+	</div><!--theme-layout end-->
+{% endblock %}

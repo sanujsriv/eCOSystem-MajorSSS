@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body_block %}
+
+
+		<main>
+			<div class="main-section">
+				<div class="container">
+					<div class="main-section-data">
+						<div class="row">
+							<div class="col-lg-3 col-md-4 pd-left-none no-pd">
+								<div class="main-left-sidebar no-margin">
+									<div class="user-data full-width">
+										<div class="user-profile">
+											<div class="username-dt">
+												<div class="usr-pic">
+													<img src="{% static 'images/resources/pf-icon1.png' %}" alt="">
+												</div>
+											</div><!--username-dt end-->
+											<div class="user-specs">
+												<h3>{{ user_name }}</h3>
+
+{#                                                <h3>Connected:<a href="https://twitter.com/{{ twitter_login.extra_data.access_token.screen_name }}/"target="_blank">@{{ twitter_login.extra_data.access_token.screen_name }}</a></h3>#}
+{##}
+{#                        <form method="post" action="{% url 'social:disconnect' 'twitter' %}">#}
+{#                        {% csrf_token %}#}
+{#                        <button type="submit">Disconnect from Twitter</button>#}
+{#                        </form>#}
+{#                        #}
+{#                        <button type="button" disabled>Disconnect from Twitter</button>#}
+{#                        {% endif %}#}
+{##}
+{##}
+{#												<span>CRACKED GATE 2019 AIR-1</span>#}
+											</div>
+										</div><!--user-profile end-->
+										<ul class="user-fw-status">
+											<li>
+												<a href="{% url 'profiles:FollowingView' %}" title="">
+													<h4>Following</h4>
+													<span>{{ following }}</span>
+												</a>
+											</li>
+											<li>
+												<a href="{% url 'profiles:FollowersView' %}" title="">
+													<h4>Followers</h4>
+													<span>{{ follower }}</span>
+												</a>
+											</li>
+											<li>
+												<a href="{% url 'my_profile_feed:my_profile_feed' %}" title="">View Profile</a>
+											</li>
+										</ul>
+									</div><!--user-data end-->
+{#									<div class="suggestions full-width">#}
+{#										<div class="sd-title">#}
+{#											<h3>Suggestions</h3>#}
+{#											<i class="la la-ellipsis-v"></i>#}
+{#										</div><!--sd-title end-->#}
+{#										<div class="suggestions-list">#}
+{#											<div class="suggestion-usd">#}
+{#												<img src="{% static 'images/resources/s1.png' %}" alt="">#}
+{#												<div class="sgt-text">#}
+{#													<h4>Sooraj Mishra</h4>#}
+{#													<span>Graphic Designer</span>#}
+{#												</div>#}
+{#												<span><i class="la la-plus"></i></span>#}
+{#											</div>#}
+{#											<div class="suggestion-usd">#}
+{#												<img src="{% static 'images/resources/s2.png' %}" alt="">#}
+{#												<div class="sgt-text">#}
+{#													<h4>Vivek Yadav</h4>#}
+{#													<span>PHP Developer</span>#}
+{#												</div>#}
+{#												<span><i class="la la-plus"></i></span>#}
+{#											</div>#}
+{#											<div class="suggestion-usd">#}
+{#												<img src="{% static 'images/resources/s3.png' %}" alt="">#}
+{#												<div class="sgt-text">#}
+{#													<h4>Sunil Tiwari</h4>#}
+{#													<span>Wordpress Developer</span>#}
+{#												</div>#}
+{#												<span><i class="la la-plus"></i></span>#}
+{#											</div>#}
+{#											<div class="suggestion-usd">#}
+{#												<img src="{% static 'images/resources/s4.png' %}" alt="">#}
+{#												<div class="sgt-text">#}
+{#													<h4>Saransh Gupta</h4>#}
+{#													<span>C & C++ Developer</span>#}
+{#												</div>#}
+{#												<span><i class="la la-plus"></i></span>#}
+{#											</div>#}
+{#											<div class="suggestion-usd">#}
+{#												<img src="{% static 'images/resources/s5.png' %}" alt="">#}
+{#												<div class="sgt-text">#}
+{#													<h4>Rishabh Jaiswal</h4>#}
+{#													<span>Graphic Designer</span>#}
+{#												</div>#}
+{#												<span><i class="la la-plus"></i></span>#}
+{#											</div>#}
+{#											<div class="suggestion-usd">#}
+{#												<img src="{% static 'images/resources/s6.png' %}" alt="">#}
+{#												<div class="sgt-text">#}
+{#													<h4>Saransh Gupta</h4>#}
+{#													<span>PHP Developer</span>#}
+{#												</div>#}
+{#												<span><i class="la la-plus"></i></span>#}
+{#											</div>#}
+{#											<div class="view-more">#}
+{#												<a href="{% url 'profiles:profiles' %}" title="">View More</a>#}
+{#											</div>#}
+{#										</div><!--suggestions-list end-->#}
+{#									</div><!--suggestions end-->#}
+									<!--tags-sec end-->
+								</div><!--main-left-sidebar end-->
+							</div>
+							<div class="col-lg-6 col-md-8 no-pd">
+								<div class="main-ws-sec">
+
+
+                                    <div class="post-topbar">
+																		{% if allnotifications %}
+																		{% for notification in allnotifications %}
+										<form action="{% url 'index:deletenotification' %}" method="post">
+											{% csrf_token %}
+											<div class="usy-dt">
+														<img src="{% static 'images/resources/us-pic.png' %}" alt="">
+														<div class="usy-name">
+															<a href="http://127.0.0.1:8000/my_profile_feed/customViewProfile/?profile_user_email={{ notification.author }}"><h3>@{{ notification.author }}</h3></a>
+															<span><img src="{% static 'images/clock.png' %}" alt="">{{ notification.created_on }}</span>
+														<a href="http://127.0.0.1:8000/index/post_comments/?title={{ notification.post_title }}&author={{ notification.post_author }}"><p>{{ notification.text }}</p></a>
+														<input type="submit" name="delete" value="Delete">
+														<hr>
+                                                        </div>
+												<input type="hidden" name="noti_author" value="{{ notification.author }}">
+												<input type="hidden" name="noti_text" value="{{ notification.text }}">
+												<input type="hidden" name="noti_index" value="{{ forloop.counter }}">
+												<input type="hidden" name="noti_created_on" value="{{ notification.created_on }}">
+
+
+                                    </div><!--post-topbar end-->
+
+										</form>
+                                     <br>
+
+
+                                    {% endfor %}
+																		{% else %}
+																		<h3>No notifications for you...</h3>
+																		{% endif %}
+
+                                    </div>
+
+
+								</div><!--main-ws-sec end-->
+							</div>
+
+						</div>
+					</div><!-- main-section-data end-->
+				</div>
+			</div>
+		</main>
+{% load crispy_forms_field %}
+{% load crispy_forms_tags %}
+
+
+
+
+
+
+	</div><!--theme-layout end-->
+
+
+{% endblock %}

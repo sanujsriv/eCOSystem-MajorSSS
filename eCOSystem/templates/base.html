@@ -1,0 +1,226 @@
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+        <style>
+          #show_comments {
+            display: none;
+          }
+         </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/line-awesome.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/line-awesome-font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'lib/slick/slick.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'lib/slick/slick-theme.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
+
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+		<header>
+			<div class="container">
+				<div class="header-data">
+
+					<div class="search-bar">
+						<form>
+							<input type="hidden" name="search" placeholder="Search...">
+                            <img src="{% static 'images/eco -small.jpg'%}">
+						</form>
+					</div><!--search-bar end-->
+					<nav>
+						<ul>
+							<li>
+								<a href="{% url 'index:index' %}" title="">
+									<span><img src="{% static 'images/icon1.png' %}" alt=""></span>
+									Home
+								</a>
+							</li>
+
+							<li>
+								<a href="{% url 'profiles:profiles' %}" title="">
+									<span><img src="{% static 'images/icon3.png' %}" alt=""></span>
+									My Network
+								</a>
+                                <ul style="background-color: #01579b">
+									<li><a href="{% url 'profiles:FollowersView' %}" title="Followers">Followers</a></li>
+									<li><a href="{% url 'profiles:FollowingView' %}" title="Followings">Followings</a></li>
+								</ul>
+							</li>
+                            <li>
+								<a href="{% url 'my_profile_feed:my_profile_feed' %}" title="">
+									<span><img src="{% static 'images/icon4.png' %}" alt=""></span>
+									My Profile
+								</a>
+
+							</li>
+
+							<li>
+								<a  title="Messgage_Header"  href="#" class="not-box-open">
+									<span><img src="{% static 'images/icon6.png' %}" alt="" ></span>
+									Messages
+								</a>
+								<div class="notification-box msg">
+									<div class="nt-title">
+										<h4>Messages</h4>
+									</div>
+									<div class="nott-list">
+                    {% if chats %}
+                    <div class="nott-list" style="overflow:scroll; height: 250px">
+                    {% for chat in chats %}
+                    <div class="notfication-details">
+                          <div class="noty-user-img">
+                            <img src="{% static 'images/resources/ny-img1.png' %}" alt="">
+                          </div>
+                          <div class="notification-info">
+                            <h3><a href="http://127.0.0.1:8000/my_profile_feed/customViewProfile/?profile_user_email={{ chat.sender_email }}" title="">{{ chat.sender_name }}</a><br></h3>
+                            <p>{{ chat.message }}</p>
+                                <br>
+                              <p style="color: #d6d4e0;">{{ chat.created_on }}</p>
+                          </div><!--notification-info -->
+                        </div>
+                    <hr>
+                    {% endfor %}
+                  </div><!--nott-list end-->
+                    {% else %}
+                    <div class="notfication-details">
+                      <h3>No messages for you...</h3>
+                    </div>
+                    {% endif %}
+
+						  				<div class="view-all-nots">
+						  					<a href="http://127.0.0.1:8000/my_profile_feed/chatView/" title="" style="background-color: #01579b">View All Messsages</a>
+						  				</div>
+									</div><!--nott-list end-->
+								</div><!--notification-box end-->
+							</li>
+							<li>
+								<a title="Notification_Header" href="#" class="not-box-open">
+									<span><img src="{% static 'images/icon7.png' %}" alt=""></span>
+									Notification
+								</a>
+								<div class="notification-box" id="notifcation-div">
+									<div class="nt-title">
+										<h4>Notifications</h4>
+
+									</div>
+
+                  {% if notifications %}
+									<div class="nott-list" style="overflow:scroll; height: 250px">
+                  {% for notification in notifications %}
+									<div class="notfication-details">
+							  				<div class="noty-user-img">
+							  					<img src="{% static 'images/resources/ny-img1.png' %}" alt="">
+							  				</div>
+							  				<div class="notification-info">
+							  					<h3><a href="http://127.0.0.1:8000/my_profile_feed/customViewProfile/?profile_user_email={{ notification.author }}" title="">{{ notification.author }}</a><br></h3>
+                          {% if "followed" in notification.text %}
+                          <p>{{ notification.text }}</p>
+                          {% else %}
+                          <a href="http://127.0.0.1:8000/index/post_comments/?title={{ notification.post_title }}&author={{ notification.post_author }}"><p>{{ notification.text }}</p></a>
+                          {% endif %}
+                          <br>
+							  					<span>{{ notification.created_on }}</span>
+							  				</div><!--notification-info -->
+						  				</div>
+                  <hr>
+									{% endfor %}
+                </div><!--nott-list end-->
+                  {% else %}
+                  <div class="notfication-details" >
+                    <h3>No notifications for you...</h3>
+                  </div>
+                  {% endif %}
+
+									<div class="view-all-nots">
+						  					<a href="{% url 'index:allnotifications' %}" title="" style="background-color: #01579b">View All Notification</a>
+						  				</div>
+								</div><!--notification-box end-->
+							</li>
+						</ul>
+					</nav><!--nav end-->
+
+                <script>
+                    $(".not-box-open").on("click", function(){
+             $(this).next(".notification-box").toggleClass("active");})
+                </script>
+					<div class="menu-btn">
+						<a href="#" title=""><i class="fa fa-bars"></i></a>
+					</div><!--menu-btn end-->
+					<div class="user-account">
+						<div class="user-info">
+                            <a href="#" title=""><img src="{{MEDIA_URL}}{{user_img}}" alt="" style="height: 25px; width: 25px"><span>{{ user_name }}</span></a>
+
+							<i class="la la-sort-down" style="margin: 20px"></i>
+						</div>
+						<div class="user-account-settingss">
+							<h3>Online Status</h3>
+							<ul class="on-off-status">
+								<li>
+									<div class="fgt-sec">
+										<input type="radio" name="cc" id="c5" checked>
+										<label for="c5">
+											<span></span>
+										</label>
+										<small>Online</small>
+									</div>
+								</li>
+							</ul>
+							<h3 class="tc"><a href="{% url 'index:signout' %}" title="">Logout</a></h3>
+							<h3 class="tc">{% for assoc in backends.associated %}Logged @: {{ assoc.provider }}</h3>{% endfor %}
+{#                           <form id="myform" method="post" action="{% url 'social:disconnect' 'google-oauth2' %}">#}
+{#                                 {% csrf_token %}#}
+{#                                    <input type="button" name="name" value="value" />#}
+{#                               <a onclick="document.getElementById('myform').submit();"><h3>Disconnect</h3></a>#}
+{#                            </form>#}
+{#                        <form action="{% url 'social:disconnect' %} 'google-oauth2'" method="post">{% csrf_token %}#}
+{#                            <h3 class="tc"> <button type="submit" value="Disconnect"></button> </h3>#}
+{#    </form>#}
+{#                            <h3 class="tc">{{ backends.associated.provider }}</h3>#}
+						</div><!--user-account-settingss end-->
+					</div>
+				</div><!--header-data end-->
+			</div>
+		</header><!--header end-->
+
+    </div>
+
+        {% block body_block %}
+        {% endblock %}
+
+
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/popper.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.range-min.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/slick/slick.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/disabled.js' %}"></script>
+{#<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>#}
+{#<script type="text/javascript" src="{% static "tiny_mce/tiny_mce.js" %}"></script>#}
+{#<script type="text/javascript" src="{% static "tiny_mce/tiny_mce_src.js" %}"></script>#}
+{#<script type="text/javascript" src="{% static "tiny_mce/tiny_mce_popup.js" %}"></script>#}
+{#    <script type="text/javascript">#}
+{#    CKEDITOR.replace(id, config);#}
+{#</script>#}
+
+
+{#        <script type="text/javascript" src="{% static 'signin/js/jquery.min.js' %}"></script>#}
+{#<script type="text/javascript" src="{% static 'signin/js/popper.js' %}"></script>#}
+{#<script type="text/javascript" src="{% static 'signin/js/bootstrap.min.js' %}"></script>#}
+{#<script type="text/javascript" src="{% static 'signin/js/jquery.range-min.js' %}"></script>#}
+{#<script type="text/javascript" src="{% static 'signin/lib/slick/slick.min.js' %}"></script>#}
+{#<script type="text/javascript" src="{% static 'signin/js/script.js' %}"></script>#}
+{#<script type="text/javascript" src="{% static 'signin/js/disabled.js' %}"></script>#}
+
+  </body>
+</html>

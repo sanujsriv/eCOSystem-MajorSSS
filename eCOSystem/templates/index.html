@@ -1,0 +1,537 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body_block %}
+{##}
+
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/config.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/build-config.js' %}"></script>
+
+
+{#<script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>#}
+{#<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">#}
+
+		<main>
+			<div class="main-section">
+				<div class="container">
+					<div class="main-section-data">
+						<div class="row">
+							<div class="col-lg-3 col-md-4 pd-left-none no-pd">
+								<div class="main-left-sidebar no-margin">
+									<div class="user-data full-width">
+										<div class="user-profile">
+											<div class="username-dt">
+												<div class="usr-pic">
+													<img src="{{MEDIA_URL}}{{user_img}}" alt="" style="height: 100%; width: 100%;">
+												</div>
+											</div><!--username-dt end-->
+											<div class="user-specs">
+												<h3>{{ user_name }}</h3>
+
+{#                                                <h3>Connected:<a href="https://twitter.com/{{ twitter_login.extra_data.access_token.screen_name }}/"target="_blank">@{{ twitter_login.extra_data.access_token.screen_name }}</a></h3>#}
+{##}
+{#                        <form method="post" action="{% url 'social:disconnect' 'twitter' %}">#}
+{#                        {% csrf_token %}#}
+{#                        <button type="submit">Disconnect from Twitter</button>#}
+{#                        </form>#}
+{#                        #}
+{#                        <button type="button" disabled>Disconnect from Twitter</button>#}
+{#                        {% endif %}#}
+{##}
+{##}
+{#												<span>CRACKED GATE 2019 AIR-1</span>#}
+											</div>
+										</div><!--user-profile end-->
+										<ul class="user-fw-status">
+											<li>
+												<a href="{% url 'profiles:FollowingView' %}" title="">
+													<h4>Following</h4>
+													<span>{{ following }}</span>
+												</a>
+											</li>
+											<li>
+												<a href="{% url 'profiles:FollowersView' %}" title="">
+													<h4>Followers</h4>
+													<span>{{ follower }}</span>
+												</a>
+											</li>
+											<li>
+												<a href="{% url 'my_profile_feed:my_profile_feed' %}" title="">View Profile</a>
+											</li>
+										</ul>
+									</div><!--user-data end-->
+									<div class="suggestions full-width">
+										<div class="sd-title">
+											<h3>Suggestions</h3>
+											<!-- <i class="la la-ellipsis-v"></i> -->
+										</div><!--sd-title end-->
+										<div class="suggestions-list">
+											{% for rp in rec_profiles_list %}
+											<div class="suggestion-usd">
+												<img src="{% static 'images/resources/us-pic.png' %}" alt="">
+												<div class="sgt-text" style="width: 135px; word-wrap: break-word;">
+													<h4>{{ rp.name }}</h4>
+													<span>@{{ rp.email }}</span>
+												</div>
+												<span><a href="http://127.0.0.1:8000/my_profile_feed/customViewProfile/?profile_user_name={{ rp.name }}&profile_user_email={{ rp.email}}&View+Profile=View+Profile"><i class="la la-plus"></i></a></span>
+											</div>
+											{% endfor %}
+
+											<div class="view-more">
+												<a href="{% url 'profiles:profiles' %}" title="">View More</a>
+											</div>
+										</div><!--suggestions-list end-->
+									</div><!--suggestions end-->
+									<!--tags-sec end-->
+								</div><!--main-left-sidebar end-->
+							</div>
+							<div class="col-lg-6 col-md-8 no-pd">
+								<div class="main-ws-sec">
+									<div class="post-topbar">
+										<div class="user-picy">
+											<img src="{{MEDIA_URL}}{{user_img}}" alt="">
+										</div>
+										<div class="post-st">
+											<ul><li><a class="post-jb active" href="#" title="">Post</a></li>
+											</ul>
+										</div><!--post-st end-->
+									</div><!--post-topbar end-->
+
+
+									{% for profile in profiles %}
+									<div class="post-topbar">
+										<div class="usy-dt">
+											<img src="{% static 'images/resources/us-pic.png' %}" alt="">
+											<div class="usy-name">
+												<a href="#"><h3>{{ profile.user_name }}</h3></a>
+												<span><img src="{% static 'images/clock.png' %}" alt="">@{{ profile.user_email }}</span>
+											</div>
+										</div>
+										<div class="post-st">
+											<ul><li><a class="active" href="http://127.0.0.1:8000/my_profile_feed/customViewProfile/?profile_user_name={{ profile.user_name }}&profile_user_email={{ profile.user_email }}&View+Profile=View+Profile" title="">View Profile</a></li>
+											</ul>
+										</div>
+									</div>
+									{% endfor %}
+
+									<div class="posts-section">
+
+										{% for post in postlist %}
+										<form action="{% url 'index:PostCommentsView' %}" method="post">
+											{% csrf_token %}
+											<div class="post-bar">
+												<div class="post_topbar">
+													<div class="usy-dt">
+														<img src="{% static 'images/resources/us-pic.png' %}" alt="">
+														<div class="usy-name">
+															<a href="http://127.0.0.1:8000/my_profile_feed/customViewProfile/?profile_user_name={{ post.author_name }}&profile_user_email={{ post.author}}&View+Profile=View+Profile"><h3><input type="" class= 'astext' value="{{ post.author_name }}"></h3></a>
+															<span><img src="{% static 'images/clock.png' %}" alt="">{{ post.created_on }}</span>
+														</div>
+													</div>
+													{% if post.author == username %}
+													<div class="ed-opts">
+
+														<a href="#" title="" class="ed-opts-open"><i class="la la-trash-o"></i></a>
+
+
+
+														<ul class="ed-options">
+
+															<li><a href="http://127.0.0.1:8000/index/deletePostView/?author={{post.author}}&title={{post.title}}" title="">Delete</a></li>
+
+														</ul>
+
+													</div>
+													{% endif %}
+												</div>
+
+												<div class="job_descp">
+													<h3>{{ post.title }}</h3>
+                                                    <div style="height: 350px; overflow:hidden;">
+                                                        <p style="color: #0A246A;">{{ post.text|safe}}</p><br><br>
+                                                        <p>{{ post.image|safe}}</p><br><br>
+                                                        <br><br>
+
+{#													<ul class="skill-tags">#}
+{#														<li><a href="#" title="">HTML</a></li>#}
+{#														<li><a href="#" title="">PHP</a></li>#}
+{#														<li><a href="#" title="">CSS</a></li>#}
+{#														<li><a href="#" title="">Javascript</a></li>#}
+{#														<li><a href="#" title="">JAVA</a></li>#}
+{#														<li><a href="#" title="">Python</a></li>#}
+{#														<li><a href="#" title="">XML</a></li>#}
+{#														<li><a href="#" title="">Hadoop</a></li>#}
+{#														<li><a href="#" title="">C</a></li>#}
+{#														<li><a href="#" title="">C++</a></li>#}
+{#														<li><a href="#" title="">Data Structure</a></li>#}
+{#														<li><a href="#" title="">Algorithms</a></li>#}
+{#														<li><a href="#" title="">DBMS</a></li>#}
+{#													</ul>#}
+												</div>
+												<div>
+													<!-- <p><a href="#" title="" style="color: Grey">view more</a></p><br> -->
+													<input type="submit" class= 'astext' style="color: #337ab7;" value="View More..."><br>
+												</div>
+												<div class="job-status-bar">
+													<ul class="like-com">
+														<li>({{ post.likes_count }})Likes
+
+															{% if username in post.likes %}
+
+
+																<a href="http://127.0.0.1:8000/index/dislikeView/?title={{post.title}}&author={{post.author}}&submit=Submit"><i class="la la-thumbs-down" style="margin-top: -7px; margin-right: -4px;"></i></a>
+
+
+															{% else %}
+
+
+
+															<a href="http://127.0.0.1:8000/index/likeView/?title={{post.title}}&author={{post.author}}&submit=Submit"><i class="la la-thumbs-up" style="margin-top: -7px; margin-right: -4px;"></i></a>
+
+														{% endif %}
+
+														</li>
+
+
+														<li>
+															({{ post.comments_count }})<input type="submit" class= 'astext' value="Comments"><img src="{% static 'images/com.png' %}" alt="">
+															<input type="hidden" id="author" name="author" value="{{ post.author }}">
+															<input type="hidden" id="title" name="title" value="{{ post.title }}">
+														</li>
+													</ul>
+{#													<a><i class="la la-eye"></i>Views 50</a>#}
+												</div>
+											</div><!--post-bar end-->
+                                            </div>
+										</form>
+
+										{% endfor %}
+                                    <div align="center">
+                                    <form method="post" action="{% url 'index:index' %}">
+                                        {%csrf_token%}
+                                        <input type="hidden" name="load_more" value="load_more">
+                                        <input type="submit" value="Load More" class="btn btn-primary" style="background-color: red">
+                                    </form>
+                                        <br><br>
+                                    </div>
+
+{#										<div class="top-profiles" style="height: 300px">#}
+{#											<div class="pf-hd">#}
+{#												<h3>Top Profiles</h3>#}
+{#												<i class="la la-ellipsis-v"></i>#}
+{#											</div>#}
+{#											<div class="profiles-slider" style="height: -webkit-fill-available;">#}
+{#                                                {% for profile in all_profiles %}#}
+{#                                                {% if profile.user_email != username %}#}
+{#														{% if profile.user_email in current_user_followings %}#}
+{#														{{ pass }}#}
+{#														{% else %}#}
+{#												<div class="user-profy">#}
+{#													<img src="{% static 'images/resources/us-pic.png' %}" alt="">#}
+{#													<h3>{{ profile.user_name }}</h3>#}
+{#													<span>@{{ profile.user_email }}</span>#}
+{#													<ul>#}
+{#														<li><form action="{% url 'index:index' %}" method="post">{% csrf_token %}#}
+{#                                                             <input type="submit" value="Follow" name="follow_button" class="btn btn-primary" ></form></li>#}
+{#                                                        </li>#}
+{#														<li><a href="mailto:{{ profile.user_email }}" title="" class="envlp"><img src="{% static 'images/envelop.png' %}" alt=""></a></li>#}
+{#														</ul>#}
+{#													<a href="#" title="">View Profile</a>#}
+{##}
+{#												</div><!--user-profy end-->#}
+{#                                                 {% endif %}#}
+{#                                {% else %}#}
+{#                                {{ pass }}#}
+{#                                {% endif %}#}
+{##}
+{#                                {% endfor %}#}
+{#                                            </div><!--profiles-slider end-->#}
+{##}
+{#										</div><!--top-profiles end-->#}
+
+
+
+										<div class="process-comm">
+{#											<div class="spinner">#}
+{#												<div class="bounce1"></div>#}
+{#												<div class="bounce2"></div>#}
+{#												<div class="bounce3"></div>#}
+{#											</div>#}
+										</div><!--process-comm end-->
+									</div><!--posts-section end-->
+								</div><!--main-ws-sec end-->
+							</div>
+							<div class="col-lg-3 pd-right-none no-pd">
+	<div class="right-sidebar">
+		<div class="widget widget-about">
+			<div class="filter-secs">
+				<div class="filter-heading">
+					<h3>Filters</h3>
+					<a href="http://127.0.0.1:8000/index/" title="">Clear all filters</a>
+				</div><!--filter-heading end-->
+				<div class="paddy">
+					<div class="filter-dd">
+						<div class="filter-ttl">
+							<h3>Enter Keyword</h3>
+						</div>
+						<form action="" name="search-form" method="GET">
+							<input type="text" name="q" placeholder="Search..." value="{{ request.GET.q }}">
+							<hr>
+							<div class="filter-ttl">
+								<h3>Select Type</h3>
+							</div>
+							<div class="filter-dd">
+							<select name="search_type">
+								<option>Select...</option>
+								<option>By Profiles</option>
+								<option>By Posts</option>
+							</select>
+							</div>
+							<div class="btn btn-primary">
+									<input type="submit" name="search" value="Search" style="background-color: #337ab7; border-color: #337ab7; color: #fff;">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div><!--filter-secs end-->
+			</div>
+
+
+									<div class="widget widget-jobs">
+										<div class="sd-title">
+										<h3>Top Profiles</h3>
+										</div><!--sd-title end-->
+										<div class="suggestions-list">
+                                            {% for profile in top_profiles %}
+                                            <div class="suggestion-usd">
+                                                <img src="{% static 'images/resources/us-pic.png' %}" alt="">
+
+												<div class="sgt-text" style="width: 135px; word-wrap: break-word;">
+													<h4>{{ profile.name }}</h4>
+													<span>@{{ profile.email }}</span>
+												</div>
+                                                <span><a href="http://127.0.0.1:8000/my_profile_feed/customViewProfile/?profile_user_name={{ profile.name }}&profile_user_email={{ profile.email}}&View+Profile=View+Profile"><i class="la la-plus"></i></a></span>
+											</div>
+
+
+                                {% endfor %}
+
+
+								</div><!--right-sidebar end-->
+							</div>
+						</div>
+					</div><!-- main-section-data end-->
+				</div>
+			</div>
+		</main>
+{% load crispy_forms_field %}
+{% load crispy_forms_tags %}
+
+    <div class="post-popup job_post">
+			<div class="post-project" >
+				<h3>Post an idea</h3>
+                <div class="post-project-fields">
+
+						<div class="row" style="overflow: scroll; height: 400px">
+							<form action="{% url 'index:index' %}" id="postform" method="post">
+								{% csrf_token %}
+								<div class="col-lg-12">
+                                    <input type="text" name="title" placeholder="Title">
+								</div>
+								<div class="col-lg-12" >
+                                    <textarea name="text" id="text" cols="30" rows="10"></textarea><br><br>
+
+                                    <script type="text/javascript">
+                                             CKEDITOR.replace( 'text' ,
+                                                  {
+                                                      toolbar :
+[
+['ajaxsave'],
+['Styles','Format','Font','FontSize'],
+['Bold','Italic','Underline','StrikeThrough','-','Undo','Redo','-','Cut','Copy','Paste','-','Find','Replace','-','Outdent','Indent','-','Print'],
+['NumberedList', 'BulletedList', '-', 'Link', 'Unlink','-','RemoveFormat'],
+['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','TextColor','BGColor'],
+['Maximize', 'Image']
+],}
+);
+                                             </script>
+
+{#                                    toolbar = [#}
+{#   ['Styles','Format','Font','FontSize'],#}
+{#   '/',#}
+{#   ['Bold','Italic','Underline','StrikeThrough','-','Undo','Redo','-','Cut','Copy','Paste','Find','Replace','-','Outdent','Indent','-','Print'],#}
+{#   '/',#}
+{#   ['NumberedList','BulletedList','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],#}
+{#   ['Image','Table','-','Link','Flash','Smiley','TextColor','BGColor','Source']#}
+
+								</div>
+							<div class="col-lg-12">
+								<ul>
+									<li><button class="active btn btn-primary" type="submit" value="post">Post</button></li>
+								</ul>
+							</div>
+							</form>
+						</div>
+
+				</div><!--post-project-fields end-->
+				<a href="#" title=""><i class="la la-times-circle-o"></i></a>
+			</div><!--post-project end-->
+		</div><!--post-project-popup end-->
+
+		<!-- <script>
+        var editor = new MediumEditor('.editable');
+    </script> -->
+
+
+{#		<div class="chatbox-list">#}
+{#			<div class="chatbox">#}
+{#				<div class="chat-mg">#}
+{#					<a href="#" title=""><img src="{% static 'images/resources/usr-img1.png' %}" alt=""></a>#}
+{#					<span>2</span>#}
+{#				</div>#}
+{#				<div class="conversation-box">#}
+{#					<div class="con-title mg-3">#}
+{#						<div class="chat-user-info">#}
+{#							<img src="{% static 'images/resources/us-img1.png' %}" alt="">#}
+{#							<h3>John Doe <span class="status-info"></span></h3>#}
+{#						</div>#}
+{#						<div class="st-icons">#}
+{#							<a href="#" title=""><i class="la la-cog"></i></a>#}
+{#							<a href="#" title="" class="close-chat"><i class="la la-minus-square"></i></a>#}
+{#							<a href="#" title="" class="close-chat"><i class="la la-close"></i></a>#}
+{#						</div>#}
+{#					</div>#}
+{#					<div class="chat-hist mCustomScrollbar" data-mcs-theme="dark">#}
+{#						<div class="chat-msg">#}
+{#							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum congue leo eget malesuada. Vivamus suscipit tortor eget felis porttitor.</p>#}
+{#							<span>Sat, Aug 23, 1:10 PM</span>#}
+{#						</div>#}
+{#						<div class="date-nd">#}
+{#							<span>Sunday, August 24</span>#}
+{#						</div>#}
+{#						<div class="chat-msg st2">#}
+{#							<p>Cras ultricies ligula.</p>#}
+{#							<span>5 minutes ago</span>#}
+{#						</div>#}
+{#						<div class="chat-msg">#}
+{#							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum congue leo eget malesuada. Vivamus suscipit tortor eget felis porttitor.</p>#}
+{#							<span>Sat, Aug 23, 1:10 PM</span>#}
+{#						</div>#}
+{#					</div><!--chat-list end-->#}
+{#					<div class="typing-msg">#}
+{#						<form>#}
+{#							<textarea placeholder="Type a message here"></textarea>#}
+{#							<button type="submit"><i class="fa fa-send"></i></button>#}
+{#						</form>#}
+{#						<ul class="ft-options">#}
+{#							<li><a href="#" title=""><i class="la la-smile-o"></i></a></li>#}
+{#							<li><a href="#" title=""><i class="la la-camera"></i></a></li>#}
+{#							<li><a href="#" title=""><i class="fa fa-paperclip"></i></a></li>#}
+{#						</ul>#}
+{#					</div><!--typing-msg end-->#}
+{#				</div><!--chat-history end-->#}
+{#			</div>#}
+{#			<div class="chatbox">#}
+{#				<div class="chat-mg">#}
+{#					<a href="#" title=""><img src="{% static 'images/resources/usr-img2.png' %}" alt=""></a>#}
+{#				</div>#}
+{#				<div class="conversation-box">#}
+{#					<div class="con-title mg-3">#}
+{#						<div class="chat-user-info">#}
+{#							<img src="{% static 'images/resources/us-img1.png' %}" alt="">#}
+{#							<h3>John Doe <span class="status-info"></span></h3>#}
+{#						</div>#}
+{#						<div class="st-icons">#}
+{#							<a href="#" title=""><i class="la la-cog"></i></a>#}
+{#							<a href="#" title="" class="close-chat"><i class="la la-minus-square"></i></a>#}
+{#							<a href="#" title="" class="close-chat"><i class="la la-close"></i></a>#}
+{#						</div>#}
+{#					</div>#}
+{#					<div class="chat-hist mCustomScrollbar" data-mcs-theme="dark">#}
+{#						<div class="chat-msg">#}
+{#							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum congue leo eget malesuada. Vivamus suscipit tortor eget felis porttitor.</p>#}
+{#							<span>Sat, Aug 23, 1:10 PM</span>#}
+{#						</div>#}
+{#						<div class="date-nd">#}
+{#							<span>Sunday, August 24</span>#}
+{#						</div>#}
+{#						<div class="chat-msg st2">#}
+{#							<p>Cras ultricies ligula.</p>#}
+{#							<span>5 minutes ago</span>#}
+{#						</div>#}
+{#						<div class="chat-msg">#}
+{#							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum congue leo eget malesuada. Vivamus suscipit tortor eget felis porttitor.</p>#}
+{#							<span>Sat, Aug 23, 1:10 PM</span>#}
+{#						</div>#}
+{#					</div><!--chat-list end-->#}
+{#					<div class="typing-msg">#}
+{#						<form>#}
+{#							<textarea placeholder="Type a message here"></textarea>#}
+{#							<button type="submit"><i class="fa fa-send"></i></button>#}
+{#						</form>#}
+{#						<ul class="ft-options">#}
+{#							<li><a href="#" title=""><i class="la la-smile-o"></i></a></li>#}
+{#							<li><a href="#" title=""><i class="la la-camera"></i></a></li>#}
+{#							<li><a href="#" title=""><i class="fa fa-paperclip"></i></a></li>#}
+{#						</ul>#}
+{#					</div><!--typing-msg end-->#}
+{#				</div><!--chat-history end-->#}
+{#			</div>#}
+{#			<div class="chatbox">#}
+{#				<div class="chat-mg bx">#}
+{#					<a href="#" title=""><img src="{% static 'images/chat.png' %}" alt=""></a>#}
+{#					<span>2</span>#}
+{#				</div>#}
+{#				<div class="conversation-box">#}
+{#					<div class="con-title">#}
+{#						<h3>Messages</h3>#}
+{#						<a href="#" title="" class="close-chat"><i class="la la-minus-square"></i></a>#}
+{#					</div>#}
+{#					<div class="chat-list">#}
+{#						<div class="conv-list active">#}
+{#							<div class="usrr-pic">#}
+{#								<img src="{% static 'images/resources/usy1.png' %}" alt="">#}
+{#								<span class="active-status activee"></span>#}
+{#							</div>#}
+{#							<div class="usy-info">#}
+{#								<h3>John Doe</h3>#}
+{#								<span>Lorem ipsum dolor <img src="{% static 'images/smley.png' %}" alt=""></span>#}
+{#							</div>#}
+{#							<div class="ct-time">#}
+{#								<span>1:55 PM</span>#}
+{#							</div>#}
+{#							<span class="msg-numbers">2</span>#}
+{#						</div>#}
+{#						<div class="conv-list">#}
+{#							<div class="usrr-pic">#}
+{#								<img src="{% static 'images/resources/usy2.png' %}" alt="">#}
+{#							</div>#}
+{#							<div class="usy-info">#}
+{#								<h3>John Doe</h3>#}
+{#								<span>Lorem ipsum dolor <img src="{% static 'images/smley.png' %}" alt=""></span>#}
+{#							</div>#}
+{#							<div class="ct-time">#}
+{#								<span>11:39 PM</span>#}
+{#							</div>#}
+{#						</div>#}
+{#						<div class="conv-list">#}
+{#							<div class="usrr-pic">#}
+{#								<img src="{% static 'images/resources/usy3.png' %}" alt="">#}
+{#							</div>#}
+{#							<div class="usy-info">#}
+{#								<h3>John Doe</h3>#}
+{#								<span>Lorem ipsum dolor <img src="{% static 'images/smley.png' %}" alt=""></span>#}
+{#							</div>#}
+{#							<div class="ct-time">#}
+{#								<span>0.28 AM</span>#}
+{#							</div>#}
+{#						</div>#}
+{#					</div><!--chat-list end-->#}
+{#				</div><!--conversation-box end-->#}
+{#			</div>#}
+{#		</div><!--chatbox-list end-->#}
+
+	</div><!--theme-layout end-->
+
+
+{% endblock %}

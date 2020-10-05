@@ -1,0 +1,42 @@
+[
+{
+  "model": "social_django.usersocialauth",
+  "pk": 3,
+  "fields": {
+    "user": 1,
+    "provider": "google-oauth2",
+    "uid": "sanujsriv@gmail.com",
+    "extra_data": "{\"auth_time\": 1559128961, \"expires\": 3600, \"token_type\": \"Bearer\", \"access_token\": \"ya29.GlsYB4nZD3iQaR4_oKwmqRiB3-MJX0Zx2eMEFONkdShPQyVjW5bfwdZ3d1JXaeHFfO2dCEp9r-HhsydDRrkbn0JyZlRn3ANK5WZoOq5g9w8EwNQV2NYP6QA7leI2\"}"
+  }
+},
+{
+  "model": "social_django.usersocialauth",
+  "pk": 4,
+  "fields": {
+    "user": 1,
+    "provider": "google-oauth2",
+    "uid": "soorajmishra10@gmail.com",
+    "extra_data": "{\"auth_time\": 1558613650, \"expires\": 3599, \"token_type\": \"Bearer\", \"access_token\": \"ya29.GlsSB6LnxgcNwCt1OU9MqQgW3KwrwIxYBBLDmtBOO0KxO9Qk9_tr0uzJ485dj33ZmjzI-e_W9iWATb2FTmohvyWg1X68uN9Qcx4-vXHvNoEMVcsqlztwUzdjsRRJ\"}"
+  }
+},
+{
+  "model": "social_django.usersocialauth",
+  "pk": 5,
+  "fields": {
+    "user": 1,
+    "provider": "google-oauth2",
+    "uid": "saranshgupta193@gmail.com",
+    "extra_data": "{\"auth_time\": 1558620097, \"expires\": 3595, \"token_type\": \"Bearer\", \"access_token\": \"ya29.GlsSB92fOiSz5qbKzm7GzDYU6rdawasyxgX9Bv9mq6774yuWd2VJSVSSWJyqsDJu-Qhg7RThGetQwGnVh_5t8qiMRu6G7QE-0hHIqdKjgV_jy8bw93OblgbUShNW\"}"
+  }
+},
+{
+  "model": "social_django.usersocialauth",
+  "pk": 6,
+  "fields": {
+    "user": 1,
+    "provider": "google-oauth2",
+    "uid": "sajalkumar4911@gmail.com",
+    "extra_data": "{\"auth_time\": 1558768178, \"expires\": 3599, \"token_type\": \"Bearer\", \"access_token\": \"ya29.GlsUB_LeOyhfWyWe1DPNwEn1twCs-fOnPzMaPWiMptyPiLXkRoQyloZ7ImWsWxKMffjKs3p_SxPp5aoOPXhb3IZk6nVZGLhb9-khNFtiOsjlVhpBkUAWcpNP7ENr\"}"
+  }
+}
+]

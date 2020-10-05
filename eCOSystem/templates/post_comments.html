@@ -1,0 +1,542 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body_block %}
+{% load crispy_forms_field %}
+{% load crispy_forms_tags %}
+
+		<main>
+			<div class="main-section">
+				<div class="container">
+					<div class="main-section-data">
+						<div class="row">
+							<div class="col-lg-3 col-md-4 pd-left-none no-pd">
+								<div class="main-left-sidebar no-margin">
+									<div class="user-data full-width">
+										<div class="user-profile">
+											<div class="username-dt">
+												<div class="usr-pic">
+													<img src="{% static 'images/resources/pf-icon1.png' %}" alt="">
+												</div>
+											</div><!--username-dt end-->
+											<div class="user-specs">
+												<h3>{{ user_name }}</h3>
+
+{#                                                <h3>Connected:<a href="https://twitter.com/{{ twitter_login.extra_data.access_token.screen_name }}/"target="_blank">@{{ twitter_login.extra_data.access_token.screen_name }}</a></h3>#}
+{##}
+{#                        <form method="post" action="{% url 'social:disconnect' 'twitter' %}">#}
+{#                        {% csrf_token %}#}
+{#                        <button type="submit">Disconnect from Twitter</button>#}
+{#                        </form>#}
+{#                        #}
+{#                        <button type="button" disabled>Disconnect from Twitter</button>#}
+{#                        {% endif %}#}
+{##}
+{##}
+{#												<span>CRACKED GATE 2019 AIR-1</span>#}
+											</div>
+										</div><!--user-profile end-->
+										<ul class="user-fw-status">
+											<li>
+												<a href="{% url 'profiles:FollowingView' %}" title="">
+													<h4>Following</h4>
+													<span>{{ following }}</span>
+												</a>
+											</li>
+											<li>
+												<a href="{% url 'profiles:FollowersView' %}" title="">
+													<h4>Followers</h4>
+													<span>{{ follower }}</span>
+												</a>
+											</li>
+											<li>
+												<a href="{% url 'my_profile_feed:my_profile_feed' %}" title="">View Profile</a>
+											</li>
+										</ul>
+									</div><!--user-data end-->
+					
+									<!--tags-sec end-->
+								</div><!--main-left-sidebar end-->
+							</div>
+							<div class="col-lg-6 col-md-8 no-pd">
+								<div class="main-ws-sec">
+									<div class="posts-section">
+										<div class="post-bar">
+											<div class="post_topbar">
+												<div class="usy-dt">
+													<img src="{% static 'images/resources/us-pic.png' %}" alt="">
+													<div class="usy-name">
+														<a href="http://127.0.0.1:8000/my_profile_feed/customViewProfile/?profile_user_name={{ post_details.author_name }}&profile_user_email={{ post_details.author}}&View+Profile=View+Profile"><h3>{{ post_details.author_name }}</h3></a>
+														<span><img src="{% static 'images/clock.png' %}" alt="">{{ post_details.created_on }}</span>
+													</div>
+												</div>
+												<div class="ed-opts">
+													<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
+													<ul class="ed-options">
+														<li><a href="#" title="">Edit Post</a></li>
+														<li><a href="#" title="">Unsaved</a></li>
+														<li><a href="#" title="">Unbid</a></li>
+														<li><a href="#" title="">Close</a></li>
+														<li><a href="#" title="">Hide</a></li>
+													</ul>
+												</div>
+											</div>
+
+											<div class="job_descp">
+												<h3>{{ post_details.title|safe}}</h3><br><br>
+												<p>{{ post_details.text|safe}}</p><br><br>
+												<br><br>
+{#												<p><a href="#" title="" style="color: Grey">view more</a></p>#}
+{#												<ul class="skill-tags">#}
+{#													<li><a href="#" title="">HTML</a></li>#}
+{#													<li><a href="#" title="">PHP</a></li>#}
+{#													<li><a href="#" title="">CSS</a></li>#}
+{#													<li><a href="#" title="">Javascript</a></li>#}
+{#													<li><a href="#" title="">JAVA</a></li>#}
+{#													<li><a href="#" title="">Python</a></li>#}
+{#													<li><a href="#" title="">XML</a></li>#}
+{#													<li><a href="#" title="">Hadoop</a></li>#}
+{#													<li><a href="#" title="">C</a></li>#}
+{#													<li><a href="#" title="">C++</a></li>#}
+{#													<li><a href="#" title="">Data Structure</a></li>#}
+{#													<li><a href="#" title="">Algorithms</a></li>#}
+{#													<li><a href="#" title="">DBMS</a></li>#}
+{#												</ul>#}
+											</div>
+											<div class="job-status-bar">
+												<ul class="like-com">
+
+													<li>({{ post_details.likes_count }})Likes
+
+															{% if username in post_details.likes %}
+
+
+																<a href="http://127.0.0.1:8000/index/dislikeView/?title={{post_details.title}}&author={{post_details.author}}&submit=Submit"><i class="la la-thumbs-down" style="margin-top: -13px; margin-right: -4px;"></i></a>
+
+
+															{% else %}
+
+
+
+															<a href="http://127.0.0.1:8000/index/likeView/?title={{post_details.title}}&author={{post_details.author}}&submit=Submit"><i class="la la-thumbs-up" style="margin-top: -13px; margin-right: -4px;"></i></a>
+
+														{% endif %}
+													</li>
+													<li><a href="#" title="" class="com"><img src="{% static 'images/com.png' %}" alt="">({{ post_details.comments_count }})Comments</a></li>
+												</ul>
+{#												<a><i class="la la-eye"></i>Views 50</a>#}
+											</div>
+                      <div class="nott-list">
+                        <div class="notfication-details">
+                            <div class="noty-user-img">
+                              <img src="{% static 'images/resources/ny-img1.png' %}" alt="">
+                            </div>
+														{% load crispy_forms_field %}
+														{% load crispy_forms_tags %}
+
+                            <div class="notification-info">
+															<h3><a href="" title="">{{ user_name }}</a></h3>
+															<form action="{% url 'index:CommentView' %}" method="post">
+																{% csrf_token %}
+	                              {{ comment_form.text|as_crispy_field }}
+																<input type="submit" name="" value="Reply">
+																<input type="hidden" name="title" value="{{ post_details.title }}">
+															</form>
+														</div><!--notification-info -->
+                        </div>
+												{% for c in comment_list %}
+                        <div class="notfication-details">
+                            <div class="noty-user-img">
+                              <img src="{% static 'images/resources/ny-img1.png' %}" alt="">
+                            </div>
+
+                            <div class="notification-info">
+                              <h3><a href="http://127.0.0.1:8000/my_profile_feed/customViewProfile/?profile_user_email={{ c.user_email }}" title="">{{ c.user_name }}</a> </h3>
+                              <p>{{ c.text }}{% if c.user_email == username %}<br><a href="http://127.0.0.1:8000/index/deleteCommentView/?title={{ post_details.title }}&author={{ post_details.author }}&comment_author={{ c.user_email }}&comment_text={{ c.text }}" style="color: #034f84;"><u>delete</u></a>{% endif %}</p>
+
+                              <span>{{ c.created_on }}</span>
+                            </div><!--notification-info -->
+                          </div>
+													{% endfor %}
+
+                      </div><!--nott-list end-->
+										</div><!--post-bar end-->
+
+
+
+										<div class="post-bar">
+<!--
+											<div class="post_topbar">
+												<div class="usy-dt">
+													<img src="images/resources/us-pic.png" alt="">
+													<div class="usy-name">
+														<h3>John Doe</h3>
+														<span><img src="images/clock.png" alt="">3 min ago</span>
+													</div>
+												</div>
+												<div class="ed-opts">
+													<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
+													<ul class="ed-options">
+														<li><a href="#" title="">Edit Post</a></li>
+														<li><a href="#" title="">Unsaved</a></li>
+														<li><a href="#" title="">Unbid</a></li>
+														<li><a href="#" title="">Close</a></li>
+														<li><a href="#" title="">Hide</a></li>
+													</ul>
+												</div>
+											</div>
+-->
+<!--
+											<div class="epi-sec">
+												<ul class="descp">
+													<li><img src="images/icon8.png" alt=""><span>Epic Coder</span></li>
+													<li><img src="images/icon9.png" alt=""><span>India</span></li>
+												</ul>
+												<ul class="bk-links">
+													<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
+													<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
+													<li><a href="#" title="" class="bid_now">Bid Now</a></li>
+												</ul>
+											</div>
+-->
+<!--
+											<div class="job_descp">
+												<h3>Senior Wordpress Developer</h3>
+												<ul class="job-dt">
+													<li><a href="#" title="">dsadasdsad</a></li>
+													<li><span>INR 1000/hr</span></li>
+												</ul>
+												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id magna sit amet... <a href="#" title="">view more</a></p>
+												<ul class="skill-tags">
+													<li><a href="#" title="">HTML</a></li>
+													<li><a href="#" title="">PHP</a></li>
+													<li><a href="#" title="">CSS</a></li>
+													<li><a href="#" title="">Javascript</a></li>
+													<li><a href="#" title="">Wordpress</a></li>
+												</ul>
+											</div>
+-->
+<!--
+											<div class="job-status-bar">
+												<ul class="like-com">
+													<li>
+														<a href="#"><i class="la la-heart"></i> Like</a>
+														<img src="images/liked-img.png" alt="">
+														<span>25</span>
+													</li>
+													<li><a href="#" title="" class="com"><img src="images/com.png" alt=""> Comment 15</a></li>
+												</ul>
+												<a><i class="la la-eye"></i>Views 50</a>
+											</div>
+-->
+										</div><!--post-bar end-->
+										<div class="posty">
+											<div class="post-bar no-margin">
+<!--
+												<div class="post_topbar">
+													<div class="usy-dt">
+														<img src="images/resources/us-pc2.png" alt="">
+														<div class="usy-name">
+															<h3>John Doe</h3>
+															<span><img src="images/clock.png" alt="">3 min ago</span>
+														</div>
+													</div>
+													<div class="ed-opts">
+														<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
+														<ul class="ed-options">
+															<li><a href="#" title="">Edit Post</a></li>
+															<li><a href="#" title="">Unsaved</a></li>
+															<li><a href="#" title="">Unbid</a></li>
+															<li><a href="#" title="">Close</a></li>
+															<li><a href="#" title="">Hide</a></li>
+														</ul>
+													</div>
+												</div>
+-->
+<!--
+												<div class="epi-sec">
+													<ul class="descp">
+														<li><img src="images/icon8.png" alt=""><span>Epic Coder</span></li>
+														<li><img src="images/icon9.png" alt=""><span>India</span></li>
+													</ul>
+													<ul class="bk-links">
+														<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
+														<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
+													</ul>
+												</div>
+-->
+<!--
+												<div class="job_descp">
+													<h3>Senior Wordpress Developer</h3>
+													<ul class="job-dt">
+														<li><a href="#" title="">Fu</a></li>
+														<li><span>$30 </span></li>
+													</ul>
+													<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id magna sit amet... <a href="#" title="">view more</a></p>
+													<ul class="skill-tags">
+														<li><a href="#" title="">HTML</a></li>
+														<li><a href="#" title="">PHP</a></li>
+														<li><a href="#" title="">CSS</a></li>
+														<li><a href="#" title="">Javascript</a></li>
+														<li><a href="#" title="">Wordpress</a></li>
+													</ul>
+												</div>
+-->
+<!--
+												<div class="job-status-bar">
+													<ul class="like-com">
+														<li>
+															<a href="#"><i class="la la-heart"></i> Like</a>
+															<img src="images/liked-img.png" alt="">
+															<span>25</span>
+														</li>
+														<li><a href="#" title="" class="com"><img src="images/com.png" alt=""> Comment 15</a></li>
+													</ul>
+													<a><i class="la la-eye"></i>Views 50</a>
+												</div>
+-->
+											</div><!--post-bar end-->
+											<div class="comment-section">
+												<div class="plus-ic">
+													<i class="la la-plus"></i>
+												</div>
+												<div class="comment-sec">
+													<ul>
+														<li>
+<!--
+															<div class="comment-list">
+																<div class="bg-img">
+																	<img src="images/resources/bg-img1.png" alt="">
+																</div>
+																<div class="comment">
+																	<h3>John Doe</h3>
+																	<span><img src="images/clock.png" alt=""> 3 min ago</span>
+																	<p>Lorem ipsum dolor sit amet, </p>
+																	<a href="#" title="" class="active"><i class="fa fa-reply-all"></i>Reply</a>
+																</div>
+															</div>
+-->
+
+                                                            <!-- comment-list end-->
+<!--
+															<ul>
+																<li>
+																	<div class="comment-list">
+																		<div class="bg-img">
+																			<img src="images/resources/bg-img2.png" alt="">
+																		</div>
+																		<div class="comment">
+																			<h3>John Doe</h3>
+																			<span><img src="images/clock.png" alt=""> 3 min ago</span>
+																			<p>Hi John </p>
+																			<a href="#" title=""><i class="fa fa-reply-all"></i>Reply</a>
+																		</div>
+																	</div>
+																</li>
+															</ul>
+
+														</li> -->
+<!--
+														<li>
+															<div class="comment-list">
+																<div class="bg-img">
+																	<img src="images/resources/bg-img3.png" alt="">
+																</div>
+																<div class="comment">
+																	<h3>John Doe</h3>
+																	<span><img src="images/clock.png" alt=""> 3 min ago</span>
+																	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus hendrerit metus, ut ullamcorper quam finibus at.</p>
+																	<a href="#" title=""><i class="fa fa-reply-all"></i>Reply</a>
+																</div>
+															</div>
+														</li>
+-->
+													</ul>
+												</div><!--comment-sec end-->
+												<div class="post-comment">
+													<div class="cm_img">
+														<img src="{% static 'images/resources/bg-img4.png' %}" alt="">
+													</div>
+													<div class="comment_box">
+														<form>
+															<input type="text" placeholder="Post a comment">
+															<button type="submit">Send</button>
+														</form>
+													</div>
+												</div>
+
+                                                <!--post-comment end-->
+											</div>
+
+
+                                            <!--comment-section end-->
+										</div><!--posty end-->
+										<div class="process-comm">
+											<div class="spinner">
+												<div class="bounce1"></div>
+												<div class="bounce2"></div>
+												<div class="bounce3"></div>
+											</div>
+										</div><!--process-comm end-->
+									</div><!--posts-section end-->
+								</div><!--main-ws-sec end-->
+							</div>
+
+						</div>
+					</div><!-- main-section-data end-->
+				</div>
+			</div>
+		</main>
+
+
+{#		<div class="chatbox-list">#}
+{#			<div class="chatbox">#}
+{#				<div class="chat-mg">#}
+{#					<a href="#" title=""><img src="{% static 'images/resources/usr-img1.png' %}" alt=""></a>#}
+{#					<span>2</span>#}
+{#				</div>#}
+{#				<div class="conversation-box">#}
+{#					<div class="con-title mg-3">#}
+{#						<div class="chat-user-info">#}
+{#							<img src="{% static 'images/resources/us-img1.png' %}" alt="">#}
+{#							<h3>John Doe <span class="status-info"></span></h3>#}
+{#						</div>#}
+{#						<div class="st-icons">#}
+{#							<a href="#" title=""><i class="la la-cog"></i></a>#}
+{#							<a href="#" title="" class="close-chat"><i class="la la-minus-square"></i></a>#}
+{#							<a href="#" title="" class="close-chat"><i class="la la-close"></i></a>#}
+{#						</div>#}
+{#					</div>#}
+{#					<div class="chat-hist mCustomScrollbar" data-mcs-theme="dark">#}
+{#						<div class="chat-msg">#}
+{#							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum congue leo eget malesuada. Vivamus suscipit tortor eget felis porttitor.</p>#}
+{#							<span>Sat, Aug 23, 1:10 PM</span>#}
+{#						</div>#}
+{#						<div class="date-nd">#}
+{#							<span>Sunday, August 24</span>#}
+{#						</div>#}
+{#						<div class="chat-msg st2">#}
+{#							<p>Cras ultricies ligula.</p>#}
+{#							<span>5 minutes ago</span>#}
+{#						</div>#}
+{#						<div class="chat-msg">#}
+{#							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum congue leo eget malesuada. Vivamus suscipit tortor eget felis porttitor.</p>#}
+{#							<span>Sat, Aug 23, 1:10 PM</span>#}
+{#						</div>#}
+{#					</div><!--chat-list end-->#}
+{#					<div class="typing-msg">#}
+{#						<form>#}
+{#							<textarea placeholder="Type a message here"></textarea>#}
+{#							<button type="submit"><i class="fa fa-send"></i></button>#}
+{#						</form>#}
+{#						<ul class="ft-options">#}
+{#							<li><a href="#" title=""><i class="la la-smile-o"></i></a></li>#}
+{#							<li><a href="#" title=""><i class="la la-camera"></i></a></li>#}
+{#							<li><a href="#" title=""><i class="fa fa-paperclip"></i></a></li>#}
+{#						</ul>#}
+{#					</div><!--typing-msg end-->#}
+{#				</div><!--chat-history end-->#}
+{#			</div>#}
+{#			<div class="chatbox">#}
+{#				<div class="chat-mg">#}
+{#					<a href="#" title=""><img src="{% static 'images/resources/usr-img2.png' %}" alt=""></a>#}
+{#				</div>#}
+{#				<div class="conversation-box">#}
+{#					<div class="con-title mg-3">#}
+{#						<div class="chat-user-info">#}
+{#							<img src="{% static 'images/resources/us-img1.png' %}" alt="">#}
+{#							<h3>John Doe <span class="status-info"></span></h3>#}
+{#						</div>#}
+{#						<div class="st-icons">#}
+{#							<a href="#" title=""><i class="la la-cog"></i></a>#}
+{#							<a href="#" title="" class="close-chat"><i class="la la-minus-square"></i></a>#}
+{#							<a href="#" title="" class="close-chat"><i class="la la-close"></i></a>#}
+{#						</div>#}
+{#					</div>#}
+{#					<div class="chat-hist mCustomScrollbar" data-mcs-theme="dark">#}
+{#						<div class="chat-msg">#}
+{#							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum congue leo eget malesuada. Vivamus suscipit tortor eget felis porttitor.</p>#}
+{#							<span>Sat, Aug 23, 1:10 PM</span>#}
+{#						</div>#}
+{#						<div class="date-nd">#}
+{#							<span>Sunday, August 24</span>#}
+{#						</div>#}
+{#						<div class="chat-msg st2">#}
+{#							<p>Cras ultricies ligula.</p>#}
+{#							<span>5 minutes ago</span>#}
+{#						</div>#}
+{#						<div class="chat-msg">#}
+{#							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum congue leo eget malesuada. Vivamus suscipit tortor eget felis porttitor.</p>#}
+{#							<span>Sat, Aug 23, 1:10 PM</span>#}
+{#						</div>#}
+{#					</div><!--chat-list end-->#}
+{#					<div class="typing-msg">#}
+{#						<form>#}
+{#							<textarea placeholder="Type a message here"></textarea>#}
+{#							<button type="submit"><i class="fa fa-send"></i></button>#}
+{#						</form>#}
+{#						<ul class="ft-options">#}
+{#							<li><a href="#" title=""><i class="la la-smile-o"></i></a></li>#}
+{#							<li><a href="#" title=""><i class="la la-camera"></i></a></li>#}
+{#							<li><a href="#" title=""><i class="fa fa-paperclip"></i></a></li>#}
+{#						</ul>#}
+{#					</div><!--typing-msg end-->#}
+{#				</div><!--chat-history end-->#}
+{#			</div>#}
+{#			<div class="chatbox">#}
+{#				<div class="chat-mg bx">#}
+{#					<a href="#" title=""><img src="{% static 'images/chat.png' %}" alt=""></a>#}
+{#					<span>2</span>#}
+{#				</div>#}
+{#				<div class="conversation-box">#}
+{#					<div class="con-title">#}
+{#						<h3>Messages</h3>#}
+{#						<a href="#" title="" class="close-chat"><i class="la la-minus-square"></i></a>#}
+{#					</div>#}
+{#					<div class="chat-list">#}
+{#						<div class="conv-list active">#}
+{#							<div class="usrr-pic">#}
+{#								<img src="{% static 'images/resources/usy1.png' %}" alt="">#}
+{#								<span class="active-status activee"></span>#}
+{#							</div>#}
+{#							<div class="usy-info">#}
+{#								<h3>John Doe</h3>#}
+{#								<span>Lorem ipsum dolor <img src="{% static 'images/smley.png' %}" alt=""></span>#}
+{#							</div>#}
+{#							<div class="ct-time">#}
+{#								<span>1:55 PM</span>#}
+{#							</div>#}
+{#							<span class="msg-numbers">2</span>#}
+{#						</div>#}
+{#						<div class="conv-list">#}
+{#							<div class="usrr-pic">#}
+{#								<img src="{% static 'images/resources/usy2.png' %}" alt="">#}
+{#							</div>#}
+{#							<div class="usy-info">#}
+{#								<h3>John Doe</h3>#}
+{#								<span>Lorem ipsum dolor <img src="{% static 'images/smley.png' %}" alt=""></span>#}
+{#							</div>#}
+{#							<div class="ct-time">#}
+{#								<span>11:39 PM</span>#}
+{#							</div>#}
+{#						</div>#}
+{#						<div class="conv-list">#}
+{#							<div class="usrr-pic">#}
+{#								<img src="{% static 'images/resources/usy3.png' %}" alt="">#}
+{#							</div>#}
+{#							<div class="usy-info">#}
+{#								<h3>John Doe</h3>#}
+{#								<span>Lorem ipsum dolor <img src="{% static 'images/smley.png' %}" alt=""></span>#}
+{#							</div>#}
+{#							<div class="ct-time">#}
+{#								<span>0.28 AM</span>#}
+{#							</div>#}
+{#						</div>#}
+{#					</div><!--chat-list end-->#}
+{#				</div><!--conversation-box end-->#}
+{#			</div>#}
+{#		</div><!--chatbox-list end-->#}
+
+	</div><!--theme-layout end-->
+
+
+{% endblock %}

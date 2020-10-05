@@ -1,0 +1,408 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body_block %}
+
+
+		<section class="cover-sec">
+			<img src="{% static 'images/resources/cover-img.jpg' %}" alt="">
+			<a href="#" title=""><i class="fa fa-camera"></i> Change Image</a>
+		</section>
+
+
+		<main>
+			<div class="main-section">
+				<div class="container">
+					<div class="main-section-data">
+						<div class="row">
+							<div class="col-lg-3">
+								<div class="main-left-sidebar">
+									<div class="user_profile">
+										<div class="user-pro-img">
+											<img src="{{MEDIA_URL}}{{user_img}}" alt="" style="height: 200px; width: 200px;">
+											<!-- <a href="#" title=""><i class="fa fa-camera"></i></a> -->
+										</div><!--user-pro-img end-->
+										<div class="user_pro_status">
+											<ul class="flw-hr">
+												<li></li>
+												<li></li>
+											</ul>
+											<ul class="flw-status">
+												<li>
+													<span>Following</span>
+													<b>{{ following }}</b>
+												</li>
+												<li>
+													<span>Followers</span>
+													<b>{{ follower }}</b>
+												</li>
+											</ul>
+										</div><!--user_pro_status end-->
+										</div><!--user_profile end-->
+
+								</div><!--main-left-sidebar end-->
+							</div>
+							<div class="col-lg-6">
+								<div class="main-ws-sec">
+									<div class="user-tab-sec">
+										<h3>{{ profile_user_name }}</h3>
+										<div class="star-descp">
+											<span>@{{ profile_user_email }}</span>
+										</div><!--star-descp end-->
+										<div class="tab-feed st2">
+											<ul>
+
+												<li data-tab="info-dd" class="active">
+													<a href="#" title="">
+														<img src="{% static 'images/ic2.png' %}" alt="">
+														<span>Info</span>
+													</a>
+												</li>
+
+												<li data-tab="portfolio-dd">
+													<a href="#" title="">
+														<img src="{% static 'images/ic3.png' %}" alt="">
+														<span>Portfolio</span>
+													</a>
+												</li>
+
+											</ul>
+										</div><!-- tab-feed end-->
+									</div><!--user-tab-sec end-->
+
+
+									<div class="product-feed-tab current" id="info-dd">
+										<div class="user-profile-ov">
+											<h3>Overview</h3>
+
+			                		            {{ user_profile_details.overview }}
+
+                                            </div><!--user-profile-ov end-->
+										<div class="user-profile-ov st2">
+                          <h3>Experience</h3>
+
+													{% for exp in user_profile_details.experience %}
+													<div class="cardBox">
+														<div class="card">
+															<div class="card-front">
+																<div class="content">
+																	<h3>{{ exp.title }}</h3>
+																	<h5>@{{ exp.company }}</h5>
+																</div>
+															</div>
+															<div class="card-back">
+																<div class="content">
+																	<div class="logo">
+																		<h3>{{ exp.title }}</h3>
+																	</div>
+																	<ul>
+																		<li>
+																			<span><i class="fa fa-building-o" aria-hidden="true"></i></span>
+																			<span>{{ exp.company }}</span>
+																		</li>
+																		<li>
+																			<span><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+																			<span>{{ exp.location }}</span>
+																		</li>
+																	</ul>
+																	<ul>
+																		<li>
+																			<span><i class="fa fa-cube" aria-hidden="true"></i></span>
+																			<span>{{ exp.work_field }}</span>
+																		</li>
+																		<li>
+																			<span><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+																			<span>{{ exp.from_date }} - {{ exp.to_date }}</span>
+																		</li>
+																	</ul>
+																	<p style="text-align:center;">[{{ exp.descriptionExp }}]</p>
+																</div>
+															</div>
+														</div>
+													</div>
+													<br>
+													{% endfor %}
+
+																							<!-- {% for exp in experience_list %}
+																											 {{ forloop.counter }}
+																											<h4>{{ exp.title }}</h4>
+																											<h4>{{ exp.company }}</h4>
+																											{{ exp.location }}
+																											{{ exp.work_field }}
+																											{{ exp.from_date }}
+																											{{ exp.to_date }}
+																											{{ exp.descriptionExp}}
+
+																											<input type="hidden" value="{{ exp.company }}" id="get-exp-company1">
+																											<input type="hidden" value="{{ exp.title }}" id="get-exp-title1">
+																											<input type="hidden" value="{{ exp.location }}" id="get-exp-location1">
+																											<input type="hidden" value="{{ exp.work_field }}" id="get-exp-work_field1">
+																											<input type="hidden" value="{{ exp.from_date }}" id="get-exp-from_date1">
+																											<input type="hidden" value="{{ exp.to_date }}" id="get-exp-to_date1">
+																											<input type="hidden" value="{{ exp.descriptionExp }}" id="get-exp-descriptionExp1">
+																											<a href="#" title="" class="exp-bx-open-custom"><i class="fa fa-pencil"></i></a>
+																											<hr>
+
+																						{% endfor %} -->
+																				</div><!--user-profile-ov end-->
+
+
+										<div class="user-profile-ov">
+                                            <h3>Education</h3>
+																						<!-- {% for edu in edu_details_list %}
+																						{{ edu.school }}
+																						{{ edu.school_from }}
+																						{{ edu.school_to }}
+																						{{ edu.degree }}
+																						{{ edu.study_field }}
+																						{{ edu.descriptionEdu}}
+																						<input type="hidden" value="{{ edu.school }}" id="get-edu-school">
+																						<input type="hidden" value="{{ edu.school_from }}" id="get-edu-school_from">
+																						<input type="hidden" value="{{ edu.school_to }}" id="get-edu-school_to">
+																						<input type="hidden" value="{{ edu.degree }}" id="get-edu-degree">
+																						<input type="hidden" value="{{ edu.study_field }}" id="get-edu-study_field">
+																						<input type="hidden" value="{{ edu.descriptionEdu }}" id="get-edu-descriptionEdu">
+																						<a href="#" title="" class=""><i class="fa fa-pencil"></i></a>
+																						<hr>
+																						{% endfor %} -->
+																						{% for edu in user_profile_details.education_details %}
+																						<div class="cardBox">
+																							<div class="card">
+																								<div class="card-front">
+																									<div class="content">
+																										<h3>{{ edu.degree }}</h3>
+																										<h5>@{{ edu.school }}</h5>
+																									</div>
+																								</div>
+																								<div class="card-back">
+																									<div class="content">
+																										<div class="logo">
+																											<h3>{{ edu.degree }}</h3>
+																										</div>
+																										<ul>
+																											<li>
+																												<span><i class="fa fa-building-o" aria-hidden="true"></i></span>
+																												<span>{{ edu.school }}</span>
+																											</li>
+																											<li>
+																												<span><i class="fa fa-cube" aria-hidden="true"></i></span>
+																												<span>{{ edu.study_field }}</span>
+																											</li>
+																										</ul>
+																										<ul>
+																											<li>
+																												<span><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+																												<span>{{ edu.school_from }} - {{ edu.school_to }}</span>
+																											</li>
+																										</ul>
+																										<p style="text-align:center;">[{{ edu.descriptionEdu }}]</p>
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																						<br>
+																						{% endfor %}
+
+                                        </div><!--user-profile-ov end-->
+										<div class="user-profile-ov">
+																						<h3>Address</h3>
+																						<!-- {{ profile_details.address.locality }}
+																						{{ profile_details.address.city }}
+																						{{ profile_details.address.zip }}
+																						{{ profile_details.address.state }}
+																						{{ profile_details.address.country }}
+																						<input type="hidden" value="{{ profile_details.address.locality }}" id="get-addr-locality">
+																						<input type="hidden" value="{{ profile_details.address.city }}" id="get-addr-city">
+																						<input type="hidden" value="{{ profile_details.address.zip }}" id="get-addr-zip">
+																						<input type="hidden" value="{{ profile_details.address.state }}" id="get-addr-state">
+																						<input type="hidden" value="{{ profile_details.address.country }}" id="get-addr-country">
+																						<a href="#" title="" class=""><i class="fa fa-pencil"></i></a> -->
+
+																						{% if user_profile_details.address.locality %}
+																						<div class="cardBox">
+																							<div class="card">
+																								<div class="card-front">
+																									<div class="content">
+																										<h3>{{ user_profile_details.address.city }}</h3>
+																										<h5>@{{ user_profile_details.address.locality }}</h5>
+																									</div>
+																								</div>
+																								<div class="card-back">
+																									<div class="content">
+																										<div class="logo">
+																											<h3>{{ user_profile_details.address.locality }}</h3>
+																										</div>
+																										<ul>
+																											<li>
+																												<span><i class="fa fa-building-o" aria-hidden="true"></i></span>
+																												<span>{{ user_profile_details.address.city }}</span>
+																											</li>
+																											<li>
+																												<span><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+																												<span>{{ user_profile_details.address.state }}</span>
+																											</li>
+																										</ul>
+																										<ul>
+																											<li>
+																												<span><i class="fa fa-cube" aria-hidden="true"></i></span>
+																												<span>{{ user_profile_details.address.country }}</span>
+																											</li>
+																											<li>
+																												<span><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+																												<span>{{ user_profile_details.address.zip }}</span>
+																											</li>
+																										</ul>
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																						<br>
+																						{% endif %}
+
+										</div>
+
+                                        <div class="user-profile-ov">
+																						<h3>Interests</h3>
+																						<ul>
+																							{% for intr in user_profile_details.interests %}
+																							<li><a href="#" title="">{{ intr.interest_name }}</a></li>
+																							<input type="hidden" value="{{ intr.interest_name }}" id="">
+																							{% endfor %}
+																						</ul>
+
+
+										</div>
+
+                                        <div class="user-profile-ov">
+																						<h3>Certifications</h3>
+																						<!-- {% for cert in cert_list %}
+																						{{ cert.certification_name }}
+																						{{ cert.authority }}
+																						{{ cert.cert_from }}
+																						{{ cert.cert_to }}
+																						{{ cert.cert_pic }}
+																						<input type="hidden" value="{{ cert.certification_name }}" id="get-cert-company">
+																						<input type="hidden" value="{{ cert.authority }}" id="get-cert-title">
+																						<input type="hidden" value="{{ cert.cert_from }}" id="get-cert-location">
+																						<input type="hidden" value="{{ cert.cert_to }}" id="get-cert-work_field">
+																						<input type="hidden" value="{{ cert.cert_pic }}" id="get-cert-from_date">
+																						<a href="#" title="" class=""><i class="fa fa-pencil"></i></a>
+																						<hr>
+																						{% endfor %} -->
+
+																						{% for cert in user_profile_details.certifications %}
+																						<div class="cardBox">
+																							<div class="card">
+																								<div class="card-front">
+																									<div class="content">
+																										<h3>{{ cert.certification_name }}</h3>
+																										<h5>@{{ cert.authority }}</h5>
+																									</div>
+																								</div>
+																								<div class="card-back">
+																									<div class="content">
+																										<div class="logo">
+																											<h5>{{ cert.certification_name }}</h5>
+																										</div>
+
+																										<ul>
+																											<br>
+																											<li>
+																												<span><i class="fa fa-building-o" aria-hidden="true"></i></span>
+																												<span>{{ cert.authority }}</span>
+																											</li>
+																											<li>
+																												<span><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+																												<span>{{ cert.cert_from }} - {{ cert.cert_to }}</span>
+																											</li>
+																										</ul>
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																						<br>
+																						{% endfor %}
+										</div>
+
+										<div class="user-profile-ov">
+											<h3>Skills</h3>
+											<ul>
+												{% for skill in user_profile_details.skills %}
+												<li><a href="#" title="">{{ skill.skill_name }}</a></li>
+												<input type="hidden" value="{{ skill.skill_name }}" id="">
+												{% endfor %}
+
+												<!-- <li><a href="#" title="">PHP</a></li>
+												<li><a href="#" title="">CSS</a></li>
+												<li><a href="#" title="">Javascript</a></li>
+												<li><a href="#" title="">Wordpress</a></li>
+												<li><a href="#" title="">Photoshop</a></li>
+												<li><a href="#" title="">Illustrator</a></li>
+												<li><a href="#" title="">Corel Draw</a></li> -->
+											</ul>
+										</div><!--user-profile-ov end-->
+									</div><!--product-feed-tab end-->
+
+
+									<div class="product-feed-tab" id="portfolio-dd">
+										<div class="portfolio-gallery-sec">
+											<h3>Portfolio</h3>
+											<div class="gallery_pf">
+												<div class="row">
+													Your Resume
+												</div>
+											</div><!--gallery_pf end-->
+										</div><!--portfolio-gallery-sec end-->
+									</div><!--product-feed-tab end-->
+								</div><!--main-ws-sec end-->
+							</div>
+							<div class="col-lg-3">
+								<div class="right-sidebar">
+									{% if profile_user_email != username %}
+										{% if profile_user_email in current_user_followings %}
+										<div class="message-btn">
+											<a href="http://127.0.0.1:8000/my_profile_feed/customViewProfile/?profile_user_name={{ profile_user_name }}&profile_user_email={{ profile_user_email }}&follow_button=UnFollow" title=""><i class="fa fa-envelope"></i>UnFollow</a>
+										</div>
+										{% else %}
+										<div class="message-btn">
+											<a href="http://127.0.0.1:8000/my_profile_feed/customViewProfile/?profile_user_name={{ profile_user_name }}&profile_user_email={{ profile_user_email }}&follow_button=Follow" title=""><i class="fa fa-envelope"></i>Follow</a>
+										</div>
+										{% endif %}
+									{% endif %}
+
+								</div><!--right-sidebar end-->
+							</div>
+						</div>
+					</div><!-- main-section-data end-->
+				</div>
+			</div>
+		</main>
+
+		<footer>
+			<div class="footy-sec mn no-margin">
+				<div class="container">
+					<ul>
+						<li><a href="#" title="">Help Center</a></li>
+						<li><a href="#" title="">Privacy Policy</a></li>
+						<li><a href="#" title="">Community Guidelines</a></li>
+						<li><a href="#" title="">Cookies Policy</a></li>
+						<li><a href="#" title="">Career</a></li>
+						<li><a href="#" title="">Forum</a></li>
+						<li><a href="#" title="">Language</a></li>
+						<li><a href="#" title="">Copyright Policy</a></li>
+					</ul>
+					<p><img src="{% static 'images/copy-icon2.png' %}" alt="">Copyright 2018</p>
+					<img class="fl-rgt" src="images/logo2.png' %}" alt="">
+				</div>
+			</div>
+		</footer><!--footer end-->
+
+
+
+
+	</div><!--theme-layout end-->
+
+
+
+{#<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'}),_trfd.push({'ap':'cpsh'},{'server':'a2plcpnl0235'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='../../../img1.wsimg.com/tcc/tcc_l.combined.1.0.6.min.js'></script>#}
+<!-- Mirrored from gambolthemes.net/html/workwise/my-profile-feed.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Nov 2018 10:54:21 GMT -->
+{% endblock %}

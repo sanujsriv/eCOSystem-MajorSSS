@@ -1,0 +1,25 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Password reset on 127.0.0.1:8000
+From: webmaster@localhost
+To: saranshgupta193@gmail.com
+Date: Sat, 04 May 2019 12:04:04 -0000
+Message-ID: <155697144472.2128.9138941540220070227@DESKTOP-2FDK9AH>
+
+
+You're receiving this email because you requested a password reset for your user account at 127.0.0.1:8000.
+
+Please go to the following page and choose a new password:
+
+http://127.0.0.1:8000/reset/NDI/561-77d88feebdb82dae8324/
+
+Your username, in case you've forgotten: Saransh Gupta
+
+Thanks for using our site!
+
+The 127.0.0.1:8000 team
+
+
+
+-------------------------------------------------------------------------------
